@@ -8,7 +8,7 @@ public class Elevator {
     public static final int CAPACITY = 10;
     private int currentFloorIndex = 0;
     private Boolean isGoingUp = true;
-    private int passengersToFloor[] = {0, 0, 0, 0, 0, 0, 0};
+    private int passengersToFloor[] = new int[NUMBER_OF_FLOORS];
     private int numOfPassengers = 0;
     private Set<Passenger> boardedPassengers = new HashSet<>();
     private Building building;
@@ -31,7 +31,6 @@ public class Elevator {
         Set<Passenger> remainingPassengers = new HashSet<>();
         for (Passenger p : boardedPassengers){
             if (p.destinationFloor() == currentFloorIndex + 1){
-                //boardedPassengers.remove(p);
                 p.arrive();
                 floor.enterGroundFloor(p);
             } else {
@@ -67,7 +66,7 @@ public class Elevator {
             numOfPassengers++;
             boardedPassengers.add(passenger);
         } else {
-            throw new ElevatorFullException("test");
+            throw new ElevatorFullException("Elevator is full");
         }
     }
 

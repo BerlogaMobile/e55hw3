@@ -6,18 +6,64 @@ public class demoSec05 {
 
     public static void main(String[] args) {
 
-        Queue q = new PriorityQueue();
+        // Priority Queue Example
+        Queue<Patient> q = new PriorityQueue<>();
         q.add(new Patient(new Person("John"), 3));
         q.add(new Patient(new Person("Nathan"), 5));
         q.add(new Patient(new Person("Jane"), 1));
         q.add(new Patient(new Person("Bob"), 4));
         q.add(new Patient(new Person("Alex"), 8));
+        q.add(new Patient(new Person("Mary"), 1));
+
         System.out.println(q);
         q.poll();
         System.out.println(q);
 
-        Set s = new HashSet();
+        // HashMap Example
 
+        String text = "Imagine there's no heaven\n" +
+                "It's easy if you try\n" +
+                "No hell below us\n" +
+                "Above us only sky\n" +
+                "Imagine all the people living for today\n" +
+                "Imagine there's no countries\n" +
+                "It isn't hard to do\n" +
+                "Nothing to kill or die for\n" +
+                "And no religion too\n" +
+                "Imagine all the people living life in peace, you\n" +
+                "You may say I'm a dreamer\n" +
+                "But I'm not the only one\n" +
+                "I hope some day you'll join us\n" +
+                "And the world will be as one\n" +
+                "Imagine no possessions\n" +
+                "I wonder if you can\n" +
+                "No need for greed or hunger\n" +
+                "A brotherhood of man\n" +
+                "Imagine all the people sharing all the world, you\n" +
+                "You may say I'm a dreamer\n" +
+                "But I'm not the only one\n" +
+                "I hope some day you'll join us\n" +
+                "And the world will be as one";
+
+        String[] words = text.toLowerCase().split("[\\p{Punct}\\s]+");
+
+        Map<String, Integer> myMap = new HashMap<>();
+
+        for ( String word : words) {
+            System.out.println(word);
+            int count = myMap.containsKey(word) ? myMap.get(word) : 0;
+            count ++;
+            myMap.put(word, count);
+        }
+
+        System.out.println("Total number of words: " + words.length);
+        for (String key : myMap.keySet()) {
+            System.out.println(key + ": "+myMap.get(key));
+        }
+
+
+
+        // Hash Code example
         String name1 = "Charlie";
         String name2 = "Fred";
         String name3 = "Greg";
@@ -30,7 +76,8 @@ public class demoSec05 {
         System.out.println(name4+":"+name4.hashCode());
         System.out.println(name5+":"+name5.hashCode());
 
-        List<Patient> myList = new LinkedList<>();
+        // Collections Class utilities example
+          List<Patient> myList = new LinkedList<>();
         Patient myPatient = new Patient(new Person("Bob"), 4);
         myList.add(new Patient(new Person("John"), 3));
         myList.add(new Patient(new Person("Nathan"), 5));
@@ -47,6 +94,9 @@ public class demoSec05 {
 
         System.out.println("Max Urgency: "+Collections.max(myList));
         System.out.println("Min Urgency: "+Collections.min(myList));
+
+
+
     }
 
 
@@ -103,6 +153,9 @@ class Patient implements Comparable<Patient>{
     @Override
     public int hashCode()
     {
+        final int HASH_BASE = 11;
+        int asciiValue = (int)this.person.getName().toCharArray()[0];
+        int hashCode = asciiValue %  HASH_BASE;
         return person.getName().hashCode() + urgencyIndex;
     }
 

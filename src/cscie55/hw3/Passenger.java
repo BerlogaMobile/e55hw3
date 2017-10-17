@@ -7,6 +7,7 @@ public class Passenger {
     private int destinationFloor = UNDEFINED_FLOOR;
 
     public Passenger(int id) {
+        this.id = id;
     }
 
     public int currentFloor() {
